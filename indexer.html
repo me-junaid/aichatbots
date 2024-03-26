@@ -3,27 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>me-junaid</title>
+  <title>Project 1</title>
 </head>
 <body>
-  <script type="text/javascript">
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <i class="ri-cactus-line"></i>
+      </a>
+    </nav>
+  </header>
+  <div id="flat-chat"></div>
+  <div id="voice-flow-chat-frame"></div>
+  <script type="module">
+    import {
+      VideoExtension,
+          TimerExtension,
+          FormExtension,
+          MapExtension,
+          FileUploadExtension,
+          KBUploadExtension,
+          DateExtension,
+          ConfettiExtension,
+          FeedbackExtension} from 'https://simblifly.s3.ap-south-1.amazonaws.com/extensions.js';
     (function(d, t) {
-        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        v.onload = function() {
-          window.voiceflow.chat.load({
-            verify: { projectID: '65d0a564e3074928b3ebdef2' },
-            url: 'https://general-runtime.voiceflow.com',
-            versionID: 'production',
-          });
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+      window.voiceflow.chat.load({
+      verify: { projectID: '65ff2162b83996864c99baaf' },
+      url: 'https://general-runtime.voiceflow.com',
+      versionID: 'development', // or 'production'
+      user: {
+        name: 'Demo User',
+      },
+      render: {
+        mode: 'overlay',
+      },
+      autostart: false,
+      allowDangerousHTML: true,
+      assistant: {
+        extensions: [
+          VideoExtension,
+          TimerExtension,
+          FormExtension,
+          MapExtension,
+          FileUploadExtension,
+          KBUploadExtension,
+          DateExtension,
+          ConfettiExtension,
+          FeedbackExtension,
+        ],
+      },
+    });
         }
         v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
     })(document, 'script');
   </script>
-  <style>
-    body{
-      padding: 0;
-      margin: 0;
-    }
-  </style>
 </body>
 </html>
