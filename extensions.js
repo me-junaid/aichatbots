@@ -321,7 +321,7 @@ export const DateExtension = {
     // Get current date and time
     let currentDate = new Date()
     let minDate = new Date()
-    minDate.setMonth(currentDate.getMonth() + 0)
+    minDate.setMonth(currentDate.getMonth() + 1)
     let maxDate = new Date()
     maxDate.setMonth(currentDate.getMonth() + 2)
 
