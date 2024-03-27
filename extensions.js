@@ -1,5 +1,5 @@
 const SVG_Thumb = `<svg width="24px" height="24px" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29398 20.4966C4.56534 20.4966 4 19.8827 4 19.1539V12.3847C4 11.6559 4.56534 11.042 5.29398 11.042H8.12364L10.8534 4.92738C10.9558 4.69809 11.1677 4.54023 11.4114 4.50434L11.5175 4.49658C12.3273 4.49658 13.0978 4.85402 13.6571 5.48039C14.2015 6.09009 14.5034 6.90649 14.5034 7.7535L14.5027 8.92295L18.1434 8.92346C18.6445 8.92346 19.1173 9.13931 19.4618 9.51188L19.5612 9.62829C19.8955 10.0523 20.0479 10.6054 19.9868 11.1531L19.1398 18.742C19.0297 19.7286 18.2529 20.4966 17.2964 20.4966H8.69422H5.29398ZM11.9545 6.02658L9.41727 11.7111L9.42149 11.7693L9.42091 19.042H17.2964C17.4587 19.042 17.6222 18.8982 17.6784 18.6701L17.6942 18.5807L18.5412 10.9918C18.5604 10.8194 18.5134 10.6486 18.4189 10.5287C18.3398 10.4284 18.2401 10.378 18.1434 10.378H13.7761C13.3745 10.378 13.0488 10.0524 13.0488 9.65073V7.7535C13.0488 7.2587 12.8749 6.78825 12.5721 6.44915C12.4281 6.28794 12.2615 6.16343 12.0824 6.07923L11.9545 6.02658ZM7.96636 12.4966H5.45455V19.042H7.96636V12.4966Z" fill="white"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M5.29398 20.4966C4.56534 20.4966 4 19.8827 4 19.1539V12.3847C4 11.6559 4.56534 11.042 5.29398 11.042H8.12364L10.8534 4.92738C10.9558 4.69809 11.1677 4.54023 11.4114 4.50434L11.5175 4.49658C12.3273 4.49658 13.0978 4.85402 13.6571 5.48039C14.2015 6.09009 14.5034 6.90649 14.5034 7.7535L14.5027 8.92295L18.1434 8.92346C18.6445 8.92346 19.1173 9.13931 19.4618 9.51188L19.5612 9.62829C19.8955 10.0523 20.0479 10.6054 19.9868 11.1531L19.1398 18.742C19.0297 19.7286 18.2529 20.4966 17.2964 20.4966H8.69422H5.29398ZM11.9545 6.02658L9.41727 11.7111L9.42149 11.7693L9.42091 19.042H17.2964C17.4587 19.042 17.6222 18.8982 17.6784 18.6701L17.6942 18.5807L18.5412 10.9918C18.5604 10.8194 18.5134 10.6486 18.4189 10.5287C18.3398 10.4284 18.2401 10.378 18.1434 10.378H13.7761C13.3745 10.378 13.0488 10.0524 13.0488 9.65073V7.7535C13.0488 7.2587 12.8749 6.78825 12.5721 6.44915C12.4281 6.28794 12.2615 6.16343 12.0824 6.07923L11.9545 6.02658ZM7.96636 12.4966H5.45455V19.042H7.96636V12.4966Z" fill="currentColor"></path></svg>`
-const SVG_Star = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z"/></svg>`
+
 export const FormExtension = {
   name: 'Forms',
   type: 'response',
@@ -310,7 +310,7 @@ export const KBUploadExtension = {
   },
 }
 
-export const DateExtension = {
+export const DateExension = {
   name: 'Date',
   type: 'response',
   match: ({ trace }) =>
@@ -326,8 +326,8 @@ export const DateExtension = {
     maxDate.setMonth(currentDate.getMonth() + 0.5)
 
     // Convert to ISO string and remove seconds and milliseconds
-    // let minDateString = minDate.toISOString().slice(0, 16)
-    // let maxDateString = maxDate.toISOString().slice(0, 16)
+    let minDateString = minDate.toISOString().slice(0, 16)
+    let maxDateString = maxDate.toISOString().slice(0, 16)
 
     formContainer.innerHTML = `
           <style>
@@ -380,9 +380,9 @@ export const DateExtension = {
             }
           </style>
           <label for="date">Select your date/time</label><br>
-          <div class="meeting"><input type="date" id="meeting" name="meeting" value="" min="${minDateString}" max="${maxDateString}" /></div><br>
+          <div class="meeting"><input type="datetime-local" id="meeting" name="meeting" value="" min="${minDateString}" max="${maxDateString}" /></div><br>
           <input type="submit" id="submit" class="submit" value="Submit" disabled="disabled">
-          `          // time-local
+          `       
 
 
     const submitButton = formContainer.querySelector('#submit')
@@ -528,89 +528,102 @@ export const FeedbackExtension = {
   },
 }
 
-export const StarRatingExtension = {
-  name: 'StarRating',
+export const DateExtension = {
+  name: 'Date',
   type: 'response',
   match: ({ trace }) =>
-    trace.type === 'ext_starRating' || trace.payload.name === 'ext_starRating',
+    trace.type === 'ext_onlydate' || trace.payload.name === 'ext_onlydate',
   render: ({ trace, element }) => {
-    const starRatingContainer = document.createElement('div')
+    const formContainer = document.createElement('form')
 
-    starRatingContainer.innerHTML = `
+    // Get current date
+    let currentDate = new Date()
+    let minDate = new Date()
+    minDate.setMonth(currentDate.getMonth())
+    let maxDate = new Date()
+    maxDate.setMonth(currentDate.getMonth() + 0.5)
+
+    // Convert to ISO string and remove time
+    let minDateString = minDate.toISOString().split('T')[0]
+    let maxDateString = maxDate.toISOString().split('T')[0]
+
+    formContainer.innerHTML = `
           <style>
-            .vfrc-starRating {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            label {
+              font-size: 0.8em;
+              color: #888;
             }
-
-            .vfrc-starRating--description {
-                font-size: 0.8em;
-                color: grey;
-                pointer-events: none;
-            }
-
-            .vfrc-starRating--buttons {
-                display: flex;
-            }
-
-            .vfrc-starRating--button {
-                margin: 0;
-                padding: 0;
-                margin-left: 0px;
+            input[type="date"]::-webkit-calendar-picker-indicator {
                 border: none;
-                background: none;
-                opacity: 0.2;
+                background: transparent;
+                border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+                bottom: 0;
+                outline: none;
+                color: transparent;
+                cursor: pointer;
+                height: auto;
+                left: 0;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: auto;
+                padding:6px;
+                font: normal 8px sans-serif;
             }
-
-            .vfrc-starRating--button:hover {
-              opacity: 0.5; /* opacity on hover */
+            .meeting input{
+              background: transparent;
+              border: none;
+              padding: 2px;
+              border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+              font: normal 14px sans-serif;
+              outline:none;
+              margin: 5px 0;
+              &:focus{outline:none;}
             }
-
-            .vfrc-starRating--button.selected {
-              opacity: 0.6;
+            .invalid {
+              border-color: red;
             }
-
-            .vfrc-starRating--button.disabled {
-                pointer-events: none;
+            .submit {
+              background: linear-gradient(to right, #2e6ee1, #2e7ff1 );
+              border: none;
+              color: white;
+              padding: 10px;
+              border-radius: 5px;
+              width: 100%;
+              cursor: pointer;
+              opacity: 0.3;
+            }
+            .submit:enabled {
+              opacity: 1; /* Make the button fully opaque when it's enabled */
             }
           </style>
-          <div class="vfrc-starRating">
-            <div class="vfrc-starRating--description">Rate this:</div>
-            <div class="vfrc-starRating--buttons">
-              ${Array(5)
-                .fill()
-                .map(
-                  (_, i) =>
-                    `<button class="vfrc-starRating--button" data-rating="${i +
-                      1}">${SVG_Star}</button>`
-                )
-                .join('')}
-            </div>
-          </div>
-        `
+          <label for="date">Select your date</label><br>
+          <div class="meeting"><input type="date" id="meeting" name="meeting" value="" min="${minDateString}" max="${maxDateString}" /></div><br>
+          <input type="submit" id="submit" class="submit" value="Submit" disabled="disabled">
+          `       
 
-    starRatingContainer
-      .querySelectorAll('.vfrc-starRating--button')
-      .forEach((button) => {
-        button.addEventListener('click', function (event) {
-          const rating = this.getAttribute('data-rating')
-          window.voiceflow.chat.interact({
-            type: 'complete',
-            payload: { rating: rating },
-          })
+    const submitButton = formContainer.querySelector('#submit')
+    const dateInput = formContainer.querySelector('#meeting')
 
-          starRatingContainer
-            .querySelectorAll('.vfrc-starRating--button')
-            .forEach((btn) => {
-              btn.classList.add('disabled')
-              if (btn === this) {
-                btn.classList.add('selected')
-              }
-            })
-        })
+    dateInput.addEventListener('input', function () {
+      if (this.value) {
+        submitButton.disabled = false
+      } else {
+        submitButton.disabled = true
+      }
+    })
+    formContainer.addEventListener('submit', function (event) {
+      event.preventDefault()
+
+      const date = dateInput.value
+
+      formContainer.querySelector('.submit').remove()
+
+      window.voiceflow.chat.interact({
+        type: 'complete',
+        payload: { date: date },
       })
-
-    element.appendChild(starRatingContainer)
+    })
+    element.appendChild(formContainer)
   },
 }
