@@ -526,3 +526,53 @@ export const FeedbackExtension = {
     element.appendChild(feedbackContainer)
   },
 }
+
+export const StarRatingExtension = {
+  name: 'StarRating',
+  type: 'response',
+  match: ({ trace }) =>
+    trace.type === 'ext_star_rating' || trace.payload.name === 'ext_star_rating',
+  render: ({ trace, element }) => {
+    const starContainer = document.createElement('div')
+
+    starContainer.innerHTML = `
+          <style>
+            .star {
+              font-size: 2em;
+              color: #888;
+              cursor: pointer;
+            }
+            .star.selected {
+              color: #ff0;
+            }
+          </style>
+
+          <span class="star" data-value="1">☆</span>
+          <span class="star" data-value="2">☆</span>
+          <span class="star" data-value="3">☆</span>
+          <span class="star" data-value="4">☆</span>
+          <span class="star" data-value="5">☆</span>
+        `
+
+    starContainer.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', function (event) {
+        const value = event.target.getAttribute('data-value')
+
+        starContainer.querySelectorAll('.star').forEach(s => {
+          s.classList.remove('selected')
+          if (s.getAttribute('data-value') <= value) {
+            s.classList.add('selected')
+          }
+        })
+
+        window.voiceflow.chat.interact({
+          type: 'complete',
+          payload: { rating: value },
+        })
+      })
+    })
+
+    element.appendChild(starContainer)
+  },
+}
+
