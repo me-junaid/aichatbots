@@ -6,6 +6,9 @@
   <title>Project 1</title>
 </head>
 <body>
+  <canvas id="confetti-canvas"></canvas>
+  <div id="flat-chat"></div>
+  <div id="voiceflow-chat-frame"></div>
   <script type="module">
     import {
           VideoExtension,
@@ -24,7 +27,7 @@
       window.voiceflow.chat.load({
       verify: { projectID: '65ff2162b83996864c99baaf' },
       url: 'https://general-runtime.voiceflow.com',
-      versionID: 'production', // or 'production'
+      versionID: 'development', // or 'production'
       user: {
         name: 'Demo User',
       },
