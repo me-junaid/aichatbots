@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 1</title>
+</head>
+<body>
+  <script type="module">
+    import {
+          VideoExtension,
+          TimerExtension,
+          FormExtension,
+          MapExtension,
+          FileUploadExtension,
+          KBUploadExtension,
+          DateExtension,
+          ConfettiExtension,
+          FeedbackExtension } from 'https://simblifly.s3.ap-south-1.amazonaws.com/extensions.js';
+
+    (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+      window.voiceflow.chat.load({
+      verify: { projectID: '65ff2162b83996864c99baaf' },
+      url: 'https://general-runtime.voiceflow.com',
+      versionID: 'production', // or 'production'
+      user: {
+        name: 'Demo User',
+      },
+      render: {
+        mode: 'overlay',
+      },
+      autostart: false,
+      allowDangerousHTML: true,
+      assistant: {
+        extensions: [
+          VideoExtension,
+          TimerExtension,
+          FormExtension,
+          MapExtension,
+          FileUploadExtension,
+          KBUploadExtension,
+          DateExtension,
+          ConfettiExtension,
+          FeedbackExtension
+        ]
+      },
+    });
+        }
+        v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
+</body>
+</html>
