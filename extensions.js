@@ -531,48 +531,85 @@ export const StarRatingExtension = {
   name: 'StarRating',
   type: 'response',
   match: ({ trace }) =>
-    trace.type === 'ext_star_rating' || trace.payload.name === 'ext_star_rating',
+    trace.type === 'ext_starRating' || trace.payload.name === 'ext_starRating',
   render: ({ trace, element }) => {
-    const starContainer = document.createElement('div')
+    const starRatingContainer = document.createElement('div')
 
-    starContainer.innerHTML = `
+    starRatingContainer.innerHTML = `
           <style>
-            .star {
-              font-size: 2em;
-              color: #888;
-              cursor: pointer;
+            .vfrc-starRating {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
             }
-            .star.selected {
-              color: #ff0;
+
+            .vfrc-starRating--description {
+                font-size: 0.8em;
+                color: grey;
+                pointer-events: none;
+            }
+
+            .vfrc-starRating--buttons {
+                display: flex;
+            }
+
+            .vfrc-starRating--button {
+                margin: 0;
+                padding: 0;
+                margin-left: 0px;
+                border: none;
+                background: none;
+                opacity: 0.2;
+            }
+
+            .vfrc-starRating--button:hover {
+              opacity: 0.5; /* opacity on hover */
+            }
+
+            .vfrc-starRating--button.selected {
+              opacity: 0.6;
+            }
+
+            .vfrc-starRating--button.disabled {
+                pointer-events: none;
             }
           </style>
-
-          <span class="star" data-value="1">☆</span>
-          <span class="star" data-value="2">☆</span>
-          <span class="star" data-value="3">☆</span>
-          <span class="star" data-value="4">☆</span>
-          <span class="star" data-value="5">☆</span>
+          <div class="vfrc-starRating">
+            <div class="vfrc-starRating--description">Rate this:</div>
+            <div class="vfrc-starRating--buttons">
+              ${Array(5)
+                .fill()
+                .map(
+                  (_, i) =>
+                    `<button class="vfrc-starRating--button" data-rating="${i +
+                      1}">${SVG_Thumb}</button>`
+                )
+                .join('')}
+            </div>
+          </div>
         `
 
-    starContainer.querySelectorAll('.star').forEach(star => {
-      star.addEventListener('click', function (event) {
-        const value = event.target.getAttribute('data-value')
+    starRatingContainer
+      .querySelectorAll('.vfrc-starRating--button')
+      .forEach((button) => {
+        button.addEventListener('click', function (event) {
+          const rating = this.getAttribute('data-rating')
+          window.voiceflow.chat.interact({
+            type: 'complete',
+            payload: { rating: rating },
+          })
 
-        starContainer.querySelectorAll('.star').forEach(s => {
-          s.classList.remove('selected')
-          if (s.getAttribute('data-value') <= value) {
-            s.classList.add('selected')
-          }
-        })
-
-        window.voiceflow.chat.interact({
-          type: 'complete',
-          payload: { rating: value },
+          starRatingContainer
+            .querySelectorAll('.vfrc-starRating--button')
+            .forEach((btn) => {
+              btn.classList.add('disabled')
+              if (btn === this) {
+                btn.classList.add('selected')
+              }
+            })
         })
       })
-    })
 
-    element.appendChild(starContainer)
+    element.appendChild(starRatingContainer)
   },
 }
-
